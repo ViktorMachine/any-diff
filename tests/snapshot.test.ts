@@ -3,6 +3,9 @@
  *
  * Uses real-editor fixture HTML (Quill, Tiptap, Word paste) to verify
  * the full diffHtml pipeline output via Vitest snapshots.
+ *
+ * Note: CSS contains a random nonce per run, so we strip it before
+ * snapshotting to avoid flaky tests.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -10,6 +13,11 @@ import { diffHtml } from '../src/core/diff.js';
 import { quillOld, quillNew } from './fixtures/quill-sample.js';
 import { tiptapOld, tiptapNew } from './fixtures/tiptap-sample.js';
 import { wordOld, wordNew } from './fixtures/word-paste-sample.js';
+
+/** Strip nonce from CSS so snapshots are stable across runs */
+function normalizeCss(css: string): string {
+  return css.replace(/rtd-[0-9a-f]{4}/g, 'rtd-NONCE');
+}
 
 describe('H7: Snapshot tests — Quill editor', () => {
   it('semantic mode produces expected markers and html', () => {
@@ -35,7 +43,7 @@ describe('H7: Snapshot tests — Quill editor', () => {
 
     expect({
       html: result.html,
-      css: result.css,
+      css: normalizeCss(result.css),
       markerCount: result.markers.length,
       markerTypes: result.markers.map((m) => m.type),
     }).toMatchSnapshot();
@@ -54,7 +62,7 @@ describe('H7: Snapshot tests — Tiptap editor', () => {
 
     expect({
       html: result.html,
-      css: result.css,
+      css: normalizeCss(result.css),
       markerCount: result.markers.length,
     }).toMatchSnapshot();
   });
@@ -70,7 +78,7 @@ describe('H7: Snapshot tests — Word paste', () => {
 
     expect({
       html: result.html,
-      css: result.css,
+      css: normalizeCss(result.css),
       markerCount: result.markers.length,
     }).toMatchSnapshot();
   });
