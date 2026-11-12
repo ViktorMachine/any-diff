@@ -2,9 +2,9 @@
 
 exports[`H7: Snapshot tests — Quill editor > semantic mode produces expected markers and html 1`] = `
 {
-  "css": ".rtd-NONCE-add { background-color: #d4edda; }
-.rtd-NONCE-del { background-color: #f8d7da; text-decoration: line-through; }
-.rtd-NONCE-mod { background-color: #fff3cd; }",
+  "css": ".rtd-fae8-add { background-color: #d4edda; }
+.rtd-fae8-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-fae8-mod { background-color: #fff3cd; }",
   "html": " <p><span class="ql-size-large">Hello <strong>everyone</strong></span></p> <p>This is a <span style="color: blue;">test paragraph</span> with some text and more content.</p> <ul> <li>Item one</li> <li>Item two updated</li> <li>Item three added</li> </ul> ",
   "markerCount": 5,
   "markerTypes": [
@@ -19,9 +19,9 @@ exports[`H7: Snapshot tests — Quill editor > semantic mode produces expected m
 
 exports[`H7: Snapshot tests — Tiptap editor > semantic mode with Chinese text 1`] = `
 {
-  "css": ".rtd-NONCE-add { background-color: #d4edda; }
-.rtd-NONCE-del { background-color: #f8d7da; text-decoration: line-through; }
-.rtd-NONCE-mod { background-color: #fff3cd; }",
+  "css": ".rtd-ce7e-add { background-color: #d4edda; }
+.rtd-ce7e-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-ce7e-mod { background-color: #fff3cd; }",
   "html": " <p>这是一个<strong>更新后</strong>的测试段落。</p> <h2>标题测试</h2> <p>包含一些 <code>代码片段</code> 和 <em>新的斜体文本</em>，以及额外内容。</p> <blockquote>新增引用块</blockquote> ",
   "markerCount": 5,
 }
@@ -29,9 +29,9 @@ exports[`H7: Snapshot tests — Tiptap editor > semantic mode with Chinese text 
 
 exports[`H7: Snapshot tests — Word paste > handles excessive Word styling noise 1`] = `
 {
-  "css": ".rtd-NONCE-add { background-color: #d4edda; }
-.rtd-NONCE-del { background-color: #f8d7da; text-decoration: line-through; }
-.rtd-NONCE-mod { background-color: #fff3cd; }",
+  "css": ".rtd-f9be-add { background-color: #d4edda; }
+.rtd-f9be-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-f9be-mod { background-color: #fff3cd; }",
   "html": " <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Updated content here.</span></p> <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Another paragraph with <b>modified bold text</b> and additions.</span></p> <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">New paragraph added.</span></p> ",
   "markerCount": 5,
 }
