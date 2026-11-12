@@ -9,20 +9,21 @@ import type { VNode } from './types.js';
  * Parse HTML string to VNode tree
  * @param html - HTML string to parse
  * @param isFragment - Whether to parse as fragment (default: true)
+ * @param keepComments - Whether to keep comment nodes (default: false)
  * @returns VNode tree root
  */
-export function parseHtml(html: string, isFragment = true): VNode {
+export function parseHtml(html: string, isFragment = true, keepComments = false): VNode {
   const document = isFragment
     ? parseFragment(html)
     : parse(html);
 
-  return convertNode(document, '');
+  return convertNode(document, '', keepComments);
 }
 
 /**
  * Convert parse5 node to VNode
  */
-function convertNode(node: any, parentPath: string): VNode {
+function convertNode(node: any, parentPath: string, keepComments: boolean): VNode {
   const path = parentPath;
   const tag = getTagName(node);
 
@@ -36,8 +37,16 @@ function convertNode(node: any, parentPath: string): VNode {
     };
   }
 
-  // Comment node
+  // Comment node - skip by default
   if (tag === '#comment') {
+    if (!keepComments) {
+      return {
+        tag: '#comment',
+        attrs: { value: node.data || '' },
+        children: [],
+        path,
+      };
+    }
     return {
       tag: '#comment',
       attrs: { value: node.data || '' },
@@ -48,9 +57,11 @@ function convertNode(node: any, parentPath: string): VNode {
 
   // Document node
   if (tag === '#document' || tag === '#document-fragment') {
-    const children = (node.childNodes || []).map((child: any, index: number) =>
-      convertNode(child, `${path}/${index}`)
-    );
+    const children = (node.childNodes || [])
+      .filter((child: any) => keepComments || getTagName(child) !== '#comment')
+      .map((child: any, index: number) =>
+        convertNode(child, `${path}/${index}`, keepComments)
+      );
     return {
       tag,
       attrs: {},
@@ -67,9 +78,11 @@ function convertNode(node: any, parentPath: string): VNode {
     }
   }
 
-  const children = (node.childNodes || []).map((child: any, index: number) =>
-    convertNode(child, `${path}/${index}`)
-  );
+  const children = (node.childNodes || [])
+    .filter((child: any) => keepComments || getTagName(child) !== '#comment')
+    .map((child: any, index: number) =>
+      convertNode(child, `${path}/${index}`, keepComments)
+    );
 
   return {
     tag,

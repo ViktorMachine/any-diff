@@ -7,6 +7,7 @@ import { parseHtml } from './parser.js';
 import { semanticNormalizer, strictNormalizer } from './normalize.js';
 import { matchChildren } from './matcher.js';
 import { diffText, calculateDiffStats } from './text-diff.js';
+import { serializeVNode } from './serializer.js';
 
 /**
  * Generate nonce (4-digit hexadecimal)
@@ -142,8 +143,9 @@ export function diffHtml(
   const locale = options.locale || 'zh-CN';
 
   // Parse HTML to VNode trees
-  let oldTree = parseHtml(oldHtml);
-  let newTree = parseHtml(newHtml);
+  const keepComments = options.keepComments || false;
+  let oldTree = parseHtml(oldHtml, true, keepComments);
+  let newTree = parseHtml(newHtml, true, keepComments);
 
   // Normalize based on mode
   const normalizer = mode === 'semantic' ? semanticNormalizer : strictNormalizer;
@@ -157,8 +159,8 @@ export function diffHtml(
   // Generate CSS for markers
   const css = generateCss(nonce, markers);
 
-  // For now, return newHtml as-is (serialization with anchors to be implemented)
-  const html = newHtml;
+  // Serialize with XSS protection
+  const html = serializeVNode(newTree);
 
   return {
     html,

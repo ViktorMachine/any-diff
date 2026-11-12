@@ -2,36 +2,44 @@
 
 exports[`H7: Snapshot tests — Quill editor > semantic mode produces expected markers and html 1`] = `
 {
-  "css": "",
-  "html": "
-<p><span class="ql-size-large">Hello <strong>everyone</strong></span></p>
-<p>This is a <span style="color: blue;">test paragraph</span> with some text and more content.</p>
-<ul>
-  <li>Item one</li>
-  <li>Item two updated</li>
-  <li>Item three added</li>
-</ul>
-",
-  "markerCount": 0,
-  "markerTypes": [],
+  "css": ".rtd-5eda-add { background-color: #d4edda; }
+.rtd-5eda-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-5eda-mod { background-color: #fff3cd; }",
+  "html": " <p><span class="ql-size-large">Hello <strong>everyone</strong></span></p> <p>This is a <span style="color: blue;">test paragraph</span> with some text and more content.</p> <ul> <li>Item one</li> <li>Item two updated</li> <li>Item three added</li> </ul> ",
+  "markerCount": 5,
+  "markerTypes": [
+    "mod",
+    "mod",
+    "mod",
+    "add",
+    "add",
+  ],
+}
+`;
+
+exports[`H7: Snapshot tests — Tiptap editor > semantic mode with Chinese text 1`] = `
+{
+  "css": ".rtd-2373-add { background-color: #d4edda; }
+.rtd-2373-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-2373-mod { background-color: #fff3cd; }",
+  "html": " <p>这是一个<strong>更新后</strong>的测试段落。</p> <h2>标题测试</h2> <p>包含一些 <code>代码片段</code> 和 <em>新的斜体文本</em>，以及额外内容。</p> <blockquote>新增引用块</blockquote> ",
+  "markerCount": 5,
 }
 `;
 
 exports[`H7: Snapshot tests — Word paste > handles excessive Word styling noise 1`] = `
 {
-  "css": "",
-  "html": "
-<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Updated content here.</span></p>
-<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Another paragraph with <b>modified bold text</b> and additions.</span></p>
-<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">New paragraph added.</span></p>
-",
-  "markerCount": 0,
+  "css": ".rtd-1196-add { background-color: #d4edda; }
+.rtd-1196-del { background-color: #f8d7da; text-decoration: line-through; }
+.rtd-1196-mod { background-color: #fff3cd; }",
+  "html": " <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Updated content here.</span></p> <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Another paragraph with <b>modified bold text</b> and additions.</span></p> <p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">New paragraph added.</span></p> ",
+  "markerCount": 5,
 }
 `;
 
 exports[`H7: Snapshot tests — strict vs semantic > strict mode produces more or equal markers than semantic 1`] = `
 {
-  "semanticMarkers": 0,
-  "strictMarkers": 0,
+  "semanticMarkers": 5,
+  "strictMarkers": 5,
 }
 `;
