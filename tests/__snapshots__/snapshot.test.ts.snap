@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H7: Snapshot tests — Quill editor > semantic mode produces expected markers and html 1`] = `
+{
+  "css": "",
+  "html": "
+<p><span class="ql-size-large">Hello <strong>everyone</strong></span></p>
+<p>This is a <span style="color: blue;">test paragraph</span> with some text and more content.</p>
+<ul>
+  <li>Item one</li>
+  <li>Item two updated</li>
+  <li>Item three added</li>
+</ul>
+",
+  "markerCount": 0,
+  "markerTypes": [],
+}
+`;
+
+exports[`H7: Snapshot tests — Word paste > handles excessive Word styling noise 1`] = `
+{
+  "css": "",
+  "html": "
+<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Updated content here.</span></p>
+<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">Another paragraph with <b>modified bold text</b> and additions.</span></p>
+<p class="MsoNormal"><span style="font-size:14.0pt;font-family:Calibri">New paragraph added.</span></p>
+",
+  "markerCount": 0,
+}
+`;
+
+exports[`H7: Snapshot tests — strict vs semantic > strict mode produces more or equal markers than semantic 1`] = `
+{
+  "semanticMarkers": 0,
+  "strictMarkers": 0,
+}
+`;
